@@ -59,10 +59,6 @@ class regular_mastermind(RegulyGry):
         self.max_tries =12                                              #zdefiniowanie maksymalnej ilości prób
         self.interface = inter
 
-    def test(self):
-        print("Poprawny kod: " + str(self.code))
-        self.interface.init_window(self)
-
     def cheater(self):
         self.interface.end_game("Tere fere")
         exit
@@ -88,10 +84,7 @@ class regular_mastermind(RegulyGry):
                 raise GameEnd("Przegrana")                                  #zakończenie gry w wypadku wyczerpania prób
         except GameEnd as end:
             self.interface.end_game("\n" + end.value + "\npoprawny kod: " + str(self.code))         #obsługa zakończenia gry
-            """ print("\n",end)
-            print("poprawny kod: ", self.code) """
-            exit
-        except IncorrectCode as inc:                            #obsługa błednie wpisanego strzału
+        except IncorrectCode as inc:                                                                #obsługa błednie wpisanego strzału
             self.interface.inc_code("Kod musi składać się z " + str(inc) +" cyfr 1-6")  
     
     #funkcja sprawdzająca strzał gracza                
@@ -117,7 +110,6 @@ class regular_mastermind(RegulyGry):
             self.u_guesses_positions.append([incor_positions,cor_positions])    #zapisanie ilości poprawnych cyfr na niepoprwanych i poprawnych pozycjach
             self.feedback()
         except GameEnd as end:                                                  #obsługa zakończenia gry 
-            """ print("\n",end) """
             self.interface.end_game(end.value)
 
     #wypisanie informacji o ilości cyfr na poprawnych oraz niepoprawnych miejscach
@@ -125,10 +117,7 @@ class regular_mastermind(RegulyGry):
         self.interface.guess_labels[self.tries]['text'] = str (self.u_guesses[self.tries-1])
         self.interface.cor_pos_labels[self.tries]['text'] = str(self.u_guesses_positions[self.tries-1][1])
         self.interface.inc_pos_labels[self.tries]['text'] = str(self.u_guesses_positions[self.tries-1][0])
-        """ print("Wpisany kod: ", self.u_guesses[self.tries-1], 
-              "\nIlość poprawnych cyfr na niepoprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][0]),  
-              "\nIlość poprawnych cyfr na poprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][1])) """
-
+        
     #funkcja resetująca grę
     def reset(self):
         print("Reset")
@@ -149,13 +138,8 @@ class cheating_mastermind(RegulyGry):
         self.max_tries =12                                              #zdefiniowanie maksymalnej ilości prób
         self.interface = inter
 
-    def test(self):
-        print("Jestem oszustem")
-        self.interface.init_window(self)
-
     def cheater(self):
         self.interface.end_game("Złapałeś/aś mnie")
-        """ print("Złapałeś/aś mnie") """
     
     #fukcja która odbiera dane wejściowe, waliduje je oraz zapisuje 
     def guess(self, u_guess_str):
@@ -178,9 +162,7 @@ class cheating_mastermind(RegulyGry):
                 raise GameEnd("Przegrana")                                  #zakończenie gry w wypadku wyczerpania prób
         except GameEnd as end:
             self.interface.end_game("\n" + end.value)                                  #obsługa zakończenia gry
-            """ print("\n",end) """
         except IncorrectCode as inc:                            #obsługa błednie wpisanego strzału
-            """ print("Kod musi składać się z ",inc," cyfr 1-6")  """
             self.interface.inc_code("Kod musi składać się z " + str(inc) +" cyfr 1-6") 
 
     #funkcja generująca losowe wartości liczby cyfr na poprawnych/niepoprawnych miejscach
@@ -195,9 +177,6 @@ class cheating_mastermind(RegulyGry):
         self.interface.guess_labels[self.tries]['text'] = str (self.u_guesses[self.tries-1])
         self.interface.cor_pos_labels[self.tries]['text'] = str(self.u_guesses_positions[self.tries-1][0])
         self.interface.inc_pos_labels[self.tries]['text'] = str(self.u_guesses_positions[self.tries-1][1])
-        """ print("Wpisany kod: ", self.u_guesses[self.tries-1], 
-              "\nIlość poprawnych cyfr na niepoprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][0]),  
-              "\nIlość poprawnych cyfr na poprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][1])) """
 
     #funkcja resetująca grę    
     def reset(self):
@@ -216,16 +195,5 @@ def start_game():
     else:
         new_game = cheating_mastermind(inter)
     new_game.play()
-
-#funkcja inicjująca grę        
-def test_game():
-    cheat_chance = 0.3                      #zdefiniowanie szansy na oszukującą grę
-    x = random.random()
-    inter = Mastermind_interface.interface()
-    if x > cheat_chance:                    #wybór między normalną oraz oszukującą grą
-        new_game = regular_mastermind(inter)
-    else:
-        new_game = cheating_mastermind(inter)
-    new_game.test()
 
 start_game()                
