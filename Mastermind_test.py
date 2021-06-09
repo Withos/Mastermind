@@ -45,6 +45,9 @@ class RegulyGry(ABC):
     def reset():
         pass
 
+    def play(self):
+        self.interface.init_window(self)
+
 #zwykła wersja gry mastermind
 class regular_mastermind(RegulyGry):
     
@@ -58,16 +61,12 @@ class regular_mastermind(RegulyGry):
         self.max_tries =12                                              #zdefiniowanie maksymalnej ilości prób
         self.interface = inter
 
-    def play(self):
-        self.interface.init_window(self)
-
     def test(self):
         print("Poprawny kod: " + str(self.code))
         self.interface.init_window(self)
 
     def cheater(self):
         self.interface.end_game("Tere fere")
-        exit
         
     #fukcja która odbiera dane wejściowe, waliduje je oraz zapisuje    
     def guess(self, u_guess_str):
@@ -149,9 +148,6 @@ class cheating_mastermind(RegulyGry):
         self.u_guesses_positions = []                                   #oraz ilość cyfr na poprawnych/niepoprawnych miejscach 
         self.max_tries =12                                              #zdefiniowanie maksymalnej ilości prób
         self.interface = inter
-
-    def play(self):
-        self.interface.init_window(self)
 
     def test(self):
         print("Jestem oszustem")
