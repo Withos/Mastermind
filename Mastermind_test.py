@@ -20,11 +20,6 @@ class IncorrectCode(Exception):
         self.value = value
     def __str__(self):
         return repr(self.value)
-
-#wyjątek odpowiadający za reset gry
-class Reset(Exception):
-    def __init__(self):
-        pass
          
 #abstrakcyjna klasa bazowa po której dziedziczą obie wersje gry
 class RegulyGry(ABC):
