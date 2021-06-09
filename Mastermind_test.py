@@ -66,12 +66,14 @@ class regular_mastermind(RegulyGry):
         self.interface.init_window(self)
 
     def cheater(self):
+        print("Tere fere")
         self.interface.end_game("Tere fere")
         
     #fukcja która odbiera dane wejściowe, waliduje je oraz zapisuje    
     def guess(self, u_guess_str):
         try:
             if (self.tries<self.max_tries):                                 #walidacja ilości prób
+                print("Wpisany kod: " + u_guess_str)
                 u_guess = list(u_guess_str)                                 #zmiana danych wejściowych z string na listę 
                 if not (u_guess_str.isnumeric()):                           #sprawdzenie czy dane wejściowe składają się z cyfr
                     raise IncorrectCode(self.code_len)
@@ -96,6 +98,7 @@ class regular_mastermind(RegulyGry):
     
     #funkcja sprawdzająca strzał gracza                
     def check_guess(self):
+        print("Liczba wykorzystanych prób: " + str(self.tries))
         try:
             incor_positions = 0                                                #ilość poprawnych cyfr na niepoprawnych miejscach                  
             cor_positions = 0                                                  #ilość poprawnych cyfr na poprawnych miejscach
@@ -125,9 +128,9 @@ class regular_mastermind(RegulyGry):
         self.interface.guess_labels[self.tries]['text'] = str (self.u_guesses[self.tries-1])
         self.interface.cor_pos_labels[self.tries]['text'] = str(self.u_guesses_positions[self.tries-1][1])
         self.interface.inc_pos_labels[self.tries]['text'] = str(self.u_guesses_positions[self.tries-1][0])
-        print("Wpisany kod: ", self.u_guesses[self.tries-1], 
+        """ print("Wpisany kod: ", self.u_guesses[self.tries-1], 
               "\nIlość poprawnych cyfr na niepoprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][0]),  
-              "\nIlość poprawnych cyfr na poprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][1]))
+              "\nIlość poprawnych cyfr na poprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][1])) """
 
     #funkcja resetująca grę
     def reset(self):
@@ -195,9 +198,9 @@ class cheating_mastermind(RegulyGry):
         self.interface.guess_labels[self.tries]['text'] = str (self.u_guesses[self.tries-1])
         self.interface.cor_pos_labels[self.tries]['text'] = str(self.u_guesses_positions[self.tries-1][1])
         self.interface.inc_pos_labels[self.tries]['text'] = str(self.u_guesses_positions[self.tries-1][0])
-        print("Wpisany kod: ", self.u_guesses[self.tries-1], 
+        """ print("Wpisany kod: ", self.u_guesses[self.tries-1], 
               "\nIlość poprawnych cyfr na niepoprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][0]),  
-              "\nIlość poprawnych cyfr na poprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][1]))
+              "\nIlość poprawnych cyfr na poprawnych miejscach: ", str(self.u_guesses_positions[self.tries-1][1])) """
 
     #funkcja resetująca grę    
     def reset(self):
