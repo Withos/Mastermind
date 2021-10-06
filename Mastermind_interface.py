@@ -1,6 +1,5 @@
 from tkinter import ttk
 from tkinter import *
-import random
 
 class interface():
     def __init__(self):
